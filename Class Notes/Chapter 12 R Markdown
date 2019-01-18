@@ -1,0 +1,87 @@
+### 21.1 R MARKDOWN & RSTUDIO ###
+# run by the libraries rmarkdown, which processes and generates the markdown,
+# and knitr which produces Markdown output from R code.
+
+
+### 12.1.1 CREATING .RMD FILES ###
+# you can make em in RStudio by going to New File > R Markdown
+# we're gonna make HTML markdown files
+
+
+### 12.1.2 .RMD CONTENT ###
+# this shit at the top is your header information which details how the file
+# should be processed
+---
+title: "Example"
+author: "YOUR NAME HERE"
+date: "1/30/2017"
+output: html_document
+---
+
+# beneath the header you can either have markdown text (like from Chapter 3)
+# or you can have chunks of code.  You denote blocks of code using ```{r}
+
+
+### 12.1.3 KNITTING DOCUMENTS ###
+# hit the knit button in RStudio to compile your stuff into an actual document
+
+
+### 12.2.1 R Code Chunks ###
+# code that is written in a code chunk ```{r} is actually going to be executed
+# in the document, whereas block code ``` is just gonna show up in the doc
+Write normal **markdown** out here, then create a code block:
+
+```{r}
+# Execute R code in here
+x <- 201
+```
+
+Back to writing _markdown_ out here.
+
+# you can also name code chunks that need parameters, just like
+# functions in actual R
+```{r options_example, echo=FALSE, message=TRUE}
+# a code chunk named "options_example", with parameter `echo` assigned FALSE
+# and parameter `message` assigned TRUE
+
+# Would execute R code in here
+```
+
+# there are a lot of options you can modify about your code chunk through
+# its parameters 
+echo # whether you want the code chunk to be visible in the document?
+message # whether or not you want messages (like from print statements) to show up
+eval # if you set this to false, it won't run the code. you could also just write
+	 # ```r instead of ```{r} to prevent it from running
+
+
+### 12.2.2 Inline Code ###
+# access code right in the middle of a markdown sequence.  use a single backtick
+# to reference, and then the letter r to reference the language
+To calculate 3 + 4 inside some text, we can use `r 3 + 4` right in the _middle_.
+
+
+### 12.3 Rendering Data ###
+# its generally better to store outputs from your code chunks in variables
+# and reference it using inline code
+```{r echo=FALSE}
+output <- "Hellooooo"
+```
+And then in my markdown text I write `r output`.n
+
+
+### 12.3.2 RENDERING LISTS ###
+# this converts vectors into a list in markdown
+```{r echo=FALSE}
+animals <- c("Lions", "Tigers", "Bears")
+
+# paste a `-` in front of each, then cat the items with newlines between
+markdown_list <- paste(paste('-',animals), collapse='\n')
+```
+
+`r markdown_list`
+
+
+### 12.3.3 RENDERING TABLES ###
+# render tables using knitr::kable()
+knitr::kable(my_df)

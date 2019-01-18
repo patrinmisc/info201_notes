@@ -1,0 +1,69 @@
+### USING REMOTE SERVER ###
+# basically you can use command line as if you were in another computer
+ssh myserver.somewhere.com
+
+# if I have a username on the server, then I enter it when I try to
+# connect to the server
+ssh username@myserver.somewhere.com
+
+#proper way to cut the connection with the server 
+exit
+
+
+### D.3 COPYING FILES ###
+# there are several methods of copying files over
+
+
+### D.3.1 scp ###
+# "secure copy".  Uses user1's authority to copy "file1" from the server "host1"
+# and send that file to the filepath "file2" in the server "host2" with the 
+# permission granted by the user "user2"
+scp user1@host1:file1 user2@host2:file2
+
+
+### D.3.2 rsync ###
+# a more specialized version of scp.  It only copies over the parts of files that
+# are updated, so it's great for working with files that are very massive
+
+# -v makes the console tell you what it's doing as it all happens.
+# note that since myscript.R is a local file, I don't have to specify the
+# username and servername
+rsync -v Desktop/info201/myscript.R myusername@server.ischool.edu:scripts/
+
+# do this to copy everything in the folder rather than just one file
+rsync -v Desktop/info201/* myusername@server.ischool.edu:scripts/
+
+
+### D.3.3 GRAPHICAL FRONTENDS ###
+# if im into this sorta thing I can use WinSCP which is a program that'll
+# graphically represent the remote server rather than mandate command line
+
+
+### D.3.4 REMOTE EDITING ###
+# it's possible to use editors to mess with files while they're on another
+# server.  It'll seem like you're editing the code like nothing is different,
+# but whenever you save that information is being sent to the server and back
+# using scp or rsync or something like it.  It's not possible with RStudio
+
+
+### D.4 R and Rscript ###
+# run R from your command line by just typing "R".  You'll need to source the
+# libraries that are used in a script before you can use the script.
+source("myscript.R") # loads up everything relevant in myscript.R
+Rscript myscript.R # runs the script
+R CMD BATCH myscript.R # also runs the script, but gives better error messages
+
+### D.4.1 GRAPHICS OUTPUT WITH NO GUI ###
+# sometimes your server can't handle stuff like images, in which case you
+# have to save your figures as files.  Its a total hassle
+pdf(file="figure1.pdf", width=12, height=8)
+    # width and height in inches
+    # check also out jpeg() and png() devices.
+# do your plotting here
+plot(1:10, rnorm(10))
+# done plotting
+dev.off()
+    # saves the image to disk and closes the file.
+
+
+### D.5 LIFE ON SERVER ###

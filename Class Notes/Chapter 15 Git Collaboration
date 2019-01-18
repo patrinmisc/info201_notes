@@ -1,0 +1,27 @@
+### 15 GIT COLLABORATION ###
+# collaboration is many people working on the same project at once by
+# checking out branches.  There are many methods (workflows) of doing this,
+# but the course recommends the Feature Branch Workflow
+
+### 15.1 Centralized Workflow ###
+# everyone pushes and pulls to a single repo, like on github.  Everyone then
+# clones the repo onto their machine, and has to git pull regularly to make
+# sure they are working with up-to-date code
+
+### 15.2 FEATURE BRANCH WORKFLOW ###
+# All work, rather than occurring on the master branch, occurs on a dedicated
+# branch referred to as "feature".  One branch may be for "visualization" while
+# another may be for "UX changes"
+
+# master should ALWAYS have production-level code that works.  Then running
+# parallel with it are experimental builds that are constantly being tweaked.
+
+
+### 15.3 FORKING WORKFLOW ###
+# every developer has their own repository that they forked through github.
+# you can send your updated code to the original developer through a request to
+# integrate the code into the project.  After being subject to a CODE REVIEW
+# the original dev can say whether or not he wants to do this.
+
+# basically this workflow segments authority. In open-source projects this is very
+# useful
